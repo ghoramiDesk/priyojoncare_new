@@ -222,7 +222,7 @@ export function CareAtHomePage() {
       </section>
 
       {/* OFFERINGS */}
-      <section className="bg-surface py-16 lg:py-20">
+      <section className="bg-surface py-10 lg:py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
@@ -236,45 +236,50 @@ export function CareAtHomePage() {
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {OFFERINGS.map((o) => (
-              <div
-                key={o.title}
-                className="group flex flex-col rounded-2xl bg-background border border-border hover:border-primary hover:shadow-card transition-all overflow-hidden"
-              >
-                <div className="relative aspect-[16/9] overflow-hidden bg-muted">
-                  <img
-                    src={o.slug ? OFFERING_IMAGES[o.slug] : OFFERING_IMAGES["nursing-care"]}
-                    alt={o.title}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <h3 className="font-display text-lg font-bold">{o.title}</h3>
-                  <p className="font-bangla text-xs text-primary mt-0.5">{o.bn}</p>
-                  <p className="text-sm text-muted-foreground mt-3 leading-relaxed flex-1">
-                    {o.desc}
-                  </p>
-                  {o.slug ? (
-                    
-                    <Link
-                      {...careAtHomeLinkProps(o.slug)}
-                      className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all"
-                    >
+            {OFFERINGS.map((o) => {
+              const linkProps = o.slug
+                ? careAtHomeLinkProps(o.slug)
+                : {
+                    to: "/request",
+                    search: {
+                      service: "care-at-home",
+                      package: "",
+                    },
+                  };
+
+              return (
+                <Link
+                  key={o.title}
+                  {...linkProps}
+                  className="group flex flex-col rounded-2xl bg-background border border-border hover:border-primary hover:shadow-card transition-all overflow-hidden"
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden bg-muted">
+                    <img
+                      src={o.slug ? OFFERING_IMAGES[o.slug] : OFFERING_IMAGES["nursing-care"]}
+                      alt={o.title}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition" />
+                    <div className="absolute inset-x-0 bottom-0 h-35 bg-gradient-to-t from-white via-white/90 to-transparent" />
+
+                    <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
+                      <h3 className="font-display text-lg font-bold">{o.title}</h3>
+
+                      <p className="font-bangla text-xs text-primary mt-0.5">{o.bn}</p>
+
+                      <p className="text-sm text-muted-foreground mt-3 leading-relaxed flex-1">
+                        {o.desc}
+                      </p>
+
+                      {/* <div className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all">
                       Know More <ArrowRight className="size-4" />
-                    </Link>
-                    ) : (
-                    <Link
-                      to="/request"
-                      search={{ service: "care-at-home", package: "" }}
-                      className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all"
-                    >
-                      Know More <ArrowRight className="size-4" />
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))}
+                    </div> */}
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

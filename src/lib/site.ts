@@ -1,12 +1,13 @@
 export const SITE = {
   name: "Priyojon Care",
   tagline: "Structured senior care with transparent pricing",
-  phone: "+88 01994 888998",
-  phoneDisplay: "+880 1866-665166",
-  whatsapp: "88 01994 888998",
-  hotline: "88 01994 888998",
-  email: "priyojonorg@gmail.com",
-  address: "House 27, Road 11, Banani, Dhaka 1213",
+  phone: "+880 1994 888999",
+  phoneDisplay: "+880 1994 888999",
+  whatsapp: "+8801994888999",
+  hotline: "+8801994888999",
+  email: "info@priyojon.care",
+  googleMap: "https://share.google/5mYtUBj9UhC6W92Gq",
+  address: "93, Kazi Nazrul Islam Avenue Dhaka 1215",
 };
 
 export const whatsappLink = (msg = "Hello, I would like to learn more about Priyojon Care.") =>

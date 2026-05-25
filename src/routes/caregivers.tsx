@@ -34,7 +34,7 @@ function CaregiversPage() {
     <div>
       <section className="relative overflow-hidden bg-gradient-to-br from-accent via-background to-surface">
         <HeroSlider images={HERO_IMAGES.caregivers} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-24">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-16 lg:py-40">
           <h1 className="font-display text-4xl lg:text-5xl font-bold tracking-tight">Our Caregivers</h1>
           <p className="text-muted-foreground mt-4 text-lg max-w-2xl">Every caregiver is background-verified, professionally trained, and supervised by our medical team.</p>
         </div>
@@ -44,7 +44,7 @@ function CaregiversPage() {
       {loading ? (
         <div className="text-muted-foreground">Loading caregivers…</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {list.map((c) => (
             <article key={c.id} className="rounded-2xl border border-border bg-surface overflow-hidden shadow-card flex flex-col">
               <div className="aspect-[4/3] bg-muted overflow-hidden">

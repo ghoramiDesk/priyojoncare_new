@@ -272,7 +272,7 @@ function RequestPage() {
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <Label htmlFor="patient_name">Patient name</Label>
+                      <Label htmlFor="patient_name">Name</Label>
                       <Input id="patient_name" name="patient_name" required maxLength={120} />
                     </div>
                     <div>
@@ -282,7 +282,7 @@ function RequestPage() {
                   </div>
 
                   <div>
-                    <Label htmlFor="patient_condition">Patient condition</Label>
+                    <Label htmlFor="patient_condition">Health condition</Label>
                     <Textarea
                       id="patient_condition"
                       name="patient_condition"
@@ -298,7 +298,7 @@ function RequestPage() {
                       <Input id="preferred_date" name="preferred_date" type="date" />
                     </div>
                     <div>
-                      <Label htmlFor="preferred_time">Preferred time</Label>
+                      <Label htmlFor="preferred_time">Calling time</Label>
                       <Input
                         id="preferred_time"
                         name="preferred_time"
@@ -344,7 +344,7 @@ function RequestPage() {
                   <p className="text-xs text-muted-foreground text-center">
                     By submitting you agree to be contacted by our care team. No payment is collected online.
                   </p>
-                  {!user && (
+                  {/* {!user && (
                     <p className="text-xs text-center text-muted-foreground">
                       You'll be asked to{" "}
                       <Link to="/login" className="text-primary font-medium">
@@ -352,7 +352,7 @@ function RequestPage() {
                       </Link>{" "}
                       to track your request.
                     </p>
-                  )}
+                  )} */}
                 </form>
               </CardContent>
             </Card>

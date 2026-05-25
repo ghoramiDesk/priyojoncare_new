@@ -214,7 +214,7 @@ function HomePage() {
       {/* Hero */}
       <section className="relative bg-gradient-hero overflow-hidden">
         <HeroSlider images={HERO_IMAGES.home} />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-18 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -322,7 +322,7 @@ function HomePage() {
                     className="group relative block overflow-hidden rounded-xl border border-border bg-background hover:border-primary hover:shadow-card transition-all h-full"
                   >
                     {/* Image */}
-                    <div className="relative h-40 w-full overflow-hidden">
+                    <div className="relative h-60 w-full overflow-hidden">
                       <img
                         src={SERVICE_IMAGES[s.slug] ?? SERVICE_IMAGES.residences}
                         alt={s.title}
@@ -330,19 +330,20 @@ function HomePage() {
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
 
-                      {/* Overlay for readability */}
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition" />
-                    </div>
+                      {/* Dark overlay */}
+                      <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition" />
 
-                    {/* Content */}
-                    <div className="p-6">
-                      <h3 className="font-semibold text-lg mb-1.5 text-foreground">{s.title}</h3>
+                      {/* Bottom white gradient */}
+                      <div className="absolute inset-x-0 bottom-0 h-35 bg-gradient-to-t from-white via-white/90 to-transparent" />
 
-                      <p className="font-bangla text-xs text-primary mb-3">{s.bangla}</p>
+                      {/* Text over image */}
+                      <div className="absolute bottom-0 left-0 right-0 p-3 z-10">
+                        <h3 className="font-semibold text-lg mb-1 text-foreground">{s.title}</h3>
 
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                        {s.tagline}
-                      </p>
+                        <p className="font-bangla text-xs text-primary mb-2">{s.bangla}</p>
+
+                        <p className="text-sm text-muted-foreground leading-relaxed">{s.tagline}</p>
+                      </div>
                     </div>
                   </Link>
                 </motion.div>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import fallBackSlide from "@/assets/priyo_fall_back.jpeg"; // adjust path
 
 type Props = {
   images: string[];
@@ -6,36 +7,77 @@ type Props = {
   /** Overlay opacity 0-100, default 0 (full image visible). */
   overlay?: number;
   className?: string;
+  fallbackImage?: string;
 };
 
 /**
  * Auto-cycling background image slider for hero sections.
  * Place inside a `relative` parent and put hero content above it (z-10).
  */
-export function HeroSlider({ images, interval = 5000, overlay = 0, className = "" }: Props) {
+
+export function HeroSlider({
+  images,
+  interval = 5000,
+  overlay = 0,
+  className = "",
+  fallbackImage = fallBackSlide,
+}: Props) {
+  const validImages = images && images.length > 0 ? images : [fallbackImage];
+
   const [index, setIndex] = useState(0);
+  const [loaded, setLoaded] = useState<boolean[]>(new Array(validImages.length).fill(false));
 
   useEffect(() => {
-    if (images.length < 2) return;
-    const t = setInterval(() => setIndex((i) => (i + 1) % images.length), interval);
+    // preload all images
+    validImages.forEach((src, i) => {
+      const img = new Image();
+      img.src = src;
+
+      img.onload = () => {
+        setLoaded((prev) => {
+          const next = [...prev];
+          next[i] = true;
+          return next;
+        });
+      };
+
+      img.onerror = () => {
+        setLoaded((prev) => {
+          const next = [...prev];
+          next[i] = true;
+          return next;
+        });
+      };
+    });
+  }, [validImages]);
+
+  useEffect(() => {
+    if (validImages.length < 2) return;
+
+    const t = setInterval(() => {
+      setIndex((prev) => (prev + 1) % validImages.length);
+    }, interval);
+
     return () => clearInterval(t);
-  }, [images.length, interval]);
+  }, [validImages.length, interval]);
 
   return (
-    <div className={`absolute inset-0 -z-0 overflow-hidden ${className}`} aria-hidden="true">
-      {images.map((src, i) => (
+    <div className={`absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
+      {validImages.map((src, i) => (
         <div
-          key={src}
-          className="absolute inset-0 transition-opacity duration-[1500ms] ease-in-out bg-cover bg-center"
+          key={`${src}-${i}`}
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
           style={{
-            backgroundImage: `url(${src})`,
-            opacity: i === index ? 1 : 0,
+            backgroundImage: `url(${src || fallbackImage})`,
+            opacity: i === index && loaded[i] ? 1 : 0,
+            willChange: "opacity",
           }}
         />
       ))}
+
       {overlay > 0 && (
         <div
-          className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-accent/40"
+          className="absolute inset-0 bg-gradient-to-br from-background via-background/80 to-accent/40 pointer-events-none"
           style={{ opacity: overlay / 100 }}
         />
       )}

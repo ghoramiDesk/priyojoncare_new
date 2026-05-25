@@ -1,0 +1,1 @@
+import{a5 as t,L as o}from"./index-BBo421_u.js";const n=()=>t.jsxs("div",{className:"max-w-2xl mx-auto px-6 py-24 text-center",children:[t.jsx("h1",{className:"font-display text-3xl font-bold",children:"Service not found"}),t.jsx(o,{to:"/care-at-home",className:"text-primary mt-4 inline-block",children:"Back to Care at Home"})]});export{n as notFoundComponent};

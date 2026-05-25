@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { SITE, callLink, whatsappLink } from "@/lib/site";
 import { useAuth } from "@/lib/auth";
 import { SERVICE_NAV, serviceLinkProps } from "@/lib/routes";
+import logo from "@/assets/priyojon_logo.png"; // adjust path
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -12,7 +13,7 @@ export function SiteHeader() {
   const { user, isAdmin } = useAuth();
 
   const links = [
-    { to: "/caregivers", label: "Caregivers" },
+    { to: "/caregivers", label: "CareTeam" },
     { to: "/care-suggest", label: "AI Advisor" },
     { to: "/blog", label: "Blog" },
     { to: "/about", label: "About" },
@@ -20,13 +21,19 @@ export function SiteHeader() {
   ] as const;
 
   return (
-    <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border">
+    <header className="sticky top-0 z-50 bg-background/100 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 lg:h-20 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2 shrink-0">
+        {/* <Link to="/" className="flex items-center gap-2 shrink-0">
           <div className="size-9 rounded-md bg-gradient-primary flex items-center justify-center text-primary-foreground font-display font-bold">
             P
           </div>
           <span className="font-semibold tracking-tight text-lg">{SITE.name}</span>
+        </Link> */}
+
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <img src={logo} alt="Logo" className="h-14 rounded-md object-cover" />
+
+          {/* <span className="font-semibold tracking-tight text-lg">{SITE.name}</span> */}
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-muted-foreground">
@@ -80,8 +87,12 @@ export function SiteHeader() {
 
         <div className="hidden md:flex items-center gap-3">
           <a href={callLink} className="hidden xl:flex flex-col items-end leading-tight">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">24/7 Careline</span>
-            <span className="text-sm font-semibold text-primary tabular-nums">{SITE.phoneDisplay}</span>
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              24/7 Careline
+            </span>
+            <span className="text-sm font-semibold text-primary tabular-nums">
+              {SITE.phoneDisplay}
+            </span>
           </a>
           <Button asChild variant="outline" size="sm" className="gap-2">
             <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
@@ -143,7 +154,9 @@ export function SiteHeader() {
             ))}
             <div className="flex gap-2 pt-2 border-t border-border">
               <Button asChild variant="outline" size="sm" className="flex-1 gap-2">
-                <a href={callLink}><Phone className="size-4" /> Call</a>
+                <a href={callLink}>
+                  <Phone className="size-4" /> Call
+                </a>
               </Button>
               <Button asChild size="sm" className="flex-1 gap-2">
                 <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
